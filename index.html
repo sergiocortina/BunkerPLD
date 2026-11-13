@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>Blog PLD — Prevención de Lavado de Dinero en México</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700;6..72,800&family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f5f0; --surface:#ffffff; --surface2:#efece4; --ink:#13202e; --muted:#5b6b7a; --line:#ddd8cc;
+    --navy:#0f2a44; --navy2:#163a5e; --gold:#c19a2e; --gold-soft:#f3e9c8; --teal:#0e6b5e; --teal-soft:#dff0eb;
+    --red:#9b2c2c; --red-soft:#fbe9e7; --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0d141d; --surface:#16202e; --surface2:#1c2a3a; --ink:#eef2f5; --muted:#a7b4c0; --line:#2a3a4d; --navy:#e9eef3; --navy2:#dbe6f0; --gold:#e2b93d; --gold-soft:#2e2a16; --teal:#3ec2ab; --teal-soft:#12352f; --red-soft:#3a1f1f; }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;line-height:1.55}
+  a{color:inherit}
+  button,[role="button"],select,summary,input{ min-height:44px }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  /* Masthead */
+  .masthead{border-bottom:3px solid var(--ink);padding:28px 0 20px}
+  .masthead-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:600}
+  h1{font-family:"Newsreader",serif;font-size:clamp(44px,7vw,76px);line-height:.92;margin:8px 0 6px;letter-spacing:-.02em}
+  h1 span{color:var(--gold)}
+  .deck{font-size:18px;color:var(--muted);max-width:640px;margin:0}
+  .meta-box{text-align:right;font-size:13px;color:var(--muted);min-width:180px}
+  .meta-box strong{display:block;color:var(--ink);font-size:14px}
+  .meta-box .date{font-family:"IBM Plex Mono",monospace}
+  /* Nav */
+  .toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 92%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .toolbar .wrap{display:flex;gap:10px;align-items:center;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+  .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 14px;font-weight:600;font-size:14px;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  @media (prefers-color-scheme: dark){ .chip[aria-pressed="true"]{background:var(--gold);color:#111;border-color:var(--gold)} }
+  .search{flex:0 1 260px}
+  .search input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 14px;font-size:15px;color:var(--ink)}
+  /* Hero featured */
+  .featured{display:grid;grid-template-columns:1.55fr .85fr;gap:22px;margin:26px 0}
+  @media(max-width:820px){.featured{grid-template-columns:1fr}}
+  .featured-card{background:var(--navy);color:#fff;border-radius:18px;padding:28px;position:relative;overflow:hidden}
+  @media (prefers-color-scheme: dark){ .featured-card{background:#1d324e} }
+  .featured-card:after{content:"UIF";position:absolute;right:-10px;bottom:-28px;font-family:"Newsreader",serif;font-size:150px;font-weight:800;opacity:.09;line-height:1}
+  .tag{display:inline-flex;gap:6px;align-items:center;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:6px 10px;border-radius:999px;background:var(--gold);color:#111}
+  .tag.teal{background:var(--teal);color:#fff}.tag.plain{background:var(--surface2);color:var(--ink)}
+  .featured-card h2{font-family:"Newsreader",serif;font-size:clamp(28px,4vw,42px);line-height:1.05;margin:14px 0 12px}
+  .featured-card p{color:#dbe4ee;font-size:16px;max-width:620px}
+  .byline{font-size:13px;opacity:.85;display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .read-btn{margin-top:18px;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0f2a44;border:0;border-radius:999px;padding:11px 18px;font-weight:800;cursor:pointer}
+  .side-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .side-panel h3{margin:0 0 12px;font-size:15px;letter-spacing:.02em}
+  .side-panel ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px}
+  .side-panel li{margin:8px 0}
+  .mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .stat{background:var(--surface2);border-radius:12px;padding:12px}
+  .stat b{font-size:22px;display:block;line-height:1}
+  .stat span{font-size:12px;color:var(--muted)}
+  /* Section heads */
+  .section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:34px 0 16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+  .section-head h2{font-family:"Newsreader",serif;font-size:30px;margin:0;line-height:1}
+  .section-head p{margin:0;color:var(--muted);font-size:14px;text-align:right}
+  /* Grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:10px}
+  .card:hover{border-color:var(--gold)}
+  .card-top{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:12px;color:var(--muted)}
+  .card h3{font-family:"Newsreader",serif;font-size:21px;line-height:1.15;margin:2px 0}
+  .card p{color:var(--muted);font-size:14.5px;margin:0;flex:1}
+  .card footer{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+  .source{font-size:12.5px;font-weight:700;text-decoration:none;color:var(--teal)}
+  .open-btn{background:none;border:0;font-weight:800;cursor:pointer;padding:8px 4px;color:var(--ink)}
+  .hidden-card{display:none !important}
+  .empty{display:none;background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:22px;text-align:center;color:var(--muted)}
+  /* Timeline + explainer */
+  .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+  @media(max-width:820px){.two-col{grid-template-columns:1fr}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .timeline{list-style:none;margin:0;padding:0}
+  .timeline li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .timeline li:last-child{border-bottom:0}
+  .tdate{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:700;min-width:92px;color:var(--teal)}
+  .timeline strong{display:block;font-size:15px}
+  .timeline span{color:var(--muted);font-size:14px}
+  .steps{display:grid;gap:12px}
+  .step{display:flex;gap:14px}
+  .num{width:38px;height:38px;flex:0 0 38px;border-radius:50%;background:var(--gold-soft);border:1px solid var(--gold);display:grid;place-items:center;font-weight:800}
+  .step p{margin:2px 0;color:var(--muted);font-size:14.5px}
+  .step strong{color:var(--ink)}
+  .sources-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .sources-list span{border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:7px 11px;font-size:13px;font-weight:600}
+  /* Dialog */
+  dialog{max-width:680px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);padding:0}
+  dialog::backdrop{background:rgba(0,0,0,.55)}
+  .dialog-body{padding:26px}
+  .dialog-body h2{font-family:"Newsreader",serif;font-size:28px;line-height:1.1;margin:10px 0}
+  .dialog-body p{color:var(--muted)}
+  .dialog-body .key{background:var(--surface2);border-radius:12px;padding:14px 16px}
+  .dialog-body .key li{margin:6px 0}
+  .close-btn{float:right;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer}
+  footer.site{margin:40px 0 0;border-top:3px solid var(--ink);padding:20px 0 36px;color:var(--muted);font-size:13.5px}
+  footer.site .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="masthead"><div class="wrap">
+  <div class="masthead-top">
+    <div>
+      <div class="kicker">Prevención de Lavado de Dinero · México</div>
+      <h1>Blog <span>PLD</span></h1>
+      <p class="deck">Noticias, reformas y criterios que sí mueven el cumplimiento: UIF, CNBV, LFPIORPI, actividades vulnerables y sector financiero — explicados sin humo, con fuente y fecha en cada nota.</p>
+    </div>
+    <div class="meta-box">
+      <strong>Edición de muestra</strong>
+      <span class="date">Viernes 13 · Noviembre 2026</span><br>
+      Nota de hoy + archivo reciente<br>
+      7 notas para visualizar el formato
+    </div>
+  </div>
+</div></header>
+
+<div class="toolbar"><div class="wrap">
+  <div class="chips" role="group" aria-label="Filtrar por tema">
+    <button class="chip" data-filter="all" aria-pressed="true">Todo</button>
+    <button class="chip" data-filter="uif" aria-pressed="false">UIF</button>
+    <button class="chip" data-filter="normativa" aria-pressed="false">Normativa</button>
+    <button class="chip" data-filter="casinos" aria-pressed="false">Casinos y juegos</button>
+    <button class="chip" data-filter="financiero" aria-pressed="false">Sector financiero</button>
+    <button class="chip" data-filter="vulnerables" aria-pressed="false">Actividades vulnerables</button>
+  </div>
+  <label class="search"><input id="searchInput" type="search" placeholder="Buscar: EBR, casinos, GAFI…" aria-label="Buscar en el blog"></label>
+</div></div>
+
+<main class="wrap">
+
+  <!-- Featured -->
+  <section class="featured" aria-label="Nota destacada">
+    <article class="featured-card" data-article="uif-proveedores">
+      <span class="tag">Destacada · UIF</span>
+      <h2>UIF bloquea cuentas de proveedores electorales: 25 personas y 15 empresas en la Lista de Personas Bloqueadas</h2>
+      <p>La Unidad de Inteligencia Financiera detectó un patrón clásico: el dinero “dura muy poco en una cuenta” y pasa a cuentas sin actividad comercial aparente. Hacienda presentó denuncia ante la FGR y aclaró que el bloqueo es preventivo, no una declaración de culpabilidad.</p>
+      <div class="byline"><span>6 de noviembre de 2026</span><span>·</span><span>Lista de Personas Bloqueadas</span><span>·</span><span>Lectura 4 min</span></div>
+      <button class="read-btn" data-open="a1">Leer la nota completa →</button>
+    </article>
+    <aside class="side-panel">
+      <h3>☰ Hoy en 30 segundos</h3>
+      <ul>
+        <li><strong>Lo urgente:</strong> el 30 de noviembre entra en vigor el Acuerdo 115/2026. Si realizas una actividad vulnerable, tu EBR ya debería estar en construcción.</li>
+        <li><strong>Lo nuevo hoy:</strong> la Ley de Ingresos 2027 trae repatriación de capitales al 7.5% con controles PLD estrictos para bancos y casas de bolsa.</li>
+        <li><strong>Lo que vigilar:</strong> casinos — entre Segob, UIF y tribunales, es el sector más caliente del momento.</li>
+      </ul>
+      <div class="mini-stats">
+        <div class="stat"><b>30 nov</b><span>Entra en vigor el Acuerdo 115/2026</span></div>
+        <div class="stat"><b>202,045</b><span>Reportes de casinos a la UIF, ene–may 2026</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Grid -->
+  <div class="section-head"><h2>Últimas notas</h2><p id="countLabel">Mostrando 6 notas</p></div>
+  <section class="grid" id="grid">
+
+    <article class="card" data-cat="normativa vulnerables" data-title="acuerdo 115/2026 ebr enfoque basado en riesgos reglas generales lfpiorpi" data-article="a2">
+      <div class="card-top"><span class="tag plain">Normativa</span><time>Publicado en DOF · 7 ago 2026</time></div>
+      <h3>Acuerdo 115/2026: el EBR deja de ser buena práctica y se vuelve obligación</h3>
+      <p>Las nuevas Reglas de Carácter General de la LFPIORPI obligan a diseñar una metodología propia de riesgos, actualizar el Manual y clasificar clientes. Entrada en vigor: 30 de noviembre de 2026; lo exigible fuerte arranca el 1 de marzo de 2027.</p>
+      <footer><a class="source" href="https://www.ey.com/es_mx/technical/tax/boletines-fiscales/ey-law-flash-modificaciones-reglas-lfpiorpi" target="_blank" rel="noopener">Análisis: EY México ↗</a><button class="open-btn" data-open="a2">Leer →</button></footer>
+    </article>
+
+    <article class="card" data-cat="financiero uif" data-title="convenio uif cnbv sistema nacional antilavado lista personas bloqueadas" data-article="a3">
+      <div class="card-top"><span class="tag plain">Sector financiero</span><time>16 mar 2026</time></div>
+      <h3>UIF y CNBV firman convenio para modernizar la supervisión antilavado</h3>
+      <p>Intercambio de información más ágil, grupos de trabajo para casos relevantes y fortalecimiento tecnológico de la Lista de Personas Bloqueadas. Para bancos y SOFOMes, la supervisión conjunta se vuelve más cercana.</p>
+      <footer><a class="source" href="https://www.jornada.com.mx/2026/03/17/economia/016n3eco" target="_blank" rel="noopener">Fuente: La Jornada ↗</a><button class="open-btn" data-open="a3">Leer →</button></footer>
+    </article>
+
+    <article class="card" data-cat="casinos uif" data-title="segob reforma ley federal juegos sorteos casinos lavado dinero" data-article="a4">
+      <div class="card-top"><span class="tag plain">Casinos y juegos</span><time>3 sep 2026</time></div>
+      <h3>Segob prepara reforma a la Ley de Juegos y Sorteos contra el lavado en casinos</h3>
+      <p>La ley vigente es de 1947. La propuesta llega tras la detección de operaciones de alto riesgo en 13 casinos y con más de 202 mil reportes del sector ante la UIF entre enero y mayo de 2026, por al menos $15,287 millones.</p>
+      <footer><a class="source" href="https://www.infobae.com/mexico/2026/09/03/segob-va-contra-lavado-de-dinero-en-casinos-y-centros-de-apuestas-modificaran-ley-federal/" target="_blank" rel="noopener">Fuente: Infobae ↗</a><button class="open-btn" data-open="a4">Leer →</button></footer>
+    </article>
+
+    <article class="card" data-cat="casinos" data-title="tribunal ganador azteca bet365 betano salinas pliego bloqueo uif amparo" data-article="a5">
+      <div class="card-top"><span class="tag plain">Casinos · Tribunales</span><time>24 oct 2026</time></div>
+      <h3>Un tribunal falla a favor de Ganador Azteca, Bet365 y Betano frente al bloqueo de la UIF</h3>
+      <p>La resolución no libera las cuentas automáticamente: falta el desbloqueo formal de bancos y autoridades. El caso se vuelve referencia obligada sobre los límites y el debido proceso en la Lista de Personas Bloqueadas.</p>
+      <footer><a class="source" href="https://www.elimparcial.com/mexico/2026/10/24/tribunal-fallo-a-favor-de-salinas-pliego-y-sus-casinos-en-linea-bet-365-y-betano-anuncio-tv-azteca/?outputType=amp-type" target="_blank" rel="noopener">Fuente: El Imparcial ↗</a><button class="open-btn" data-open="a5">Leer →</button></footer>
+    </article>
+
+    <article class="card" data-cat="normativa financiero" data-title="ley ingresos federacion 2027 repatriacion capitales 7.5 pld gafi" data-article="a6">
+      <div class="card-top"><span class="tag plain">Normativa · DOF hoy</span><time>13 nov 2026 · DOF</time></div>
+      <h3>Ley de Ingresos 2027: repatriación de capitales al 7.5%, con PLD estricto</h3>
+      <p>El Transitorio Vigésimo Tercero permite retornar capitales hasta el 31 de diciembre de 2027, con permanencia mínima de 3 años. Bancos y casas de bolsa deben aplicar estrictamente las medidas PLD/FT y quedan fuera la actividad ilícita y las jurisdicciones de alto riesgo del GAFI.</p>
+      <footer><a class="source" href="https://dof.gob.mx/index.php?year=2026&month=11&day=13" target="_blank" rel="noopener">Fuente: DOF, 13 nov 2026 ↗</a><button class="open-btn" data-open="a6">Leer →</button></footer>
+    </article>
+
+    <article class="card" data-cat="financiero normativa" data-title="mexico evaluacion gafi 2027 mejoras pendientes pld financiamiento terrorismo" data-article="a7">
+      <div class="card-top"><span class="tag plain">GAFI</span><time>Actualizado · 18 jul 2026</time></div>
+      <h3>México rumbo a la evaluación del GAFI 2027: avances reales, pendientes claros</h3>
+      <p>Conservación de expedientes a 10 años, umbral de activos virtuales bajado a 210 UMA, capítulo de PEPs y aviso de 24 horas. La próxima evaluación mutua definirá si el avance alcanza — o si vuelve la presión de la lista gris.</p>
+      <footer><a class="source" href="https://kyc-systems.com/blog/mexico-mejora-sus-medidas-contra-el-lavado-de-dinero-y-financiamiento-del-terrorismo" target="_blank" rel="noopener">Fuente: KYC Systems, 18 jul 2026 ↗</a><button class="open-btn" data-open="a7">Leer →</button></footer>
+    </article>
+
+  </section>
+  <div class="empty" id="emptyState">No hay notas con ese filtro. Prueba con otro tema o limpia la búsqueda.</div>
+
+  <!-- Calendar + How it updates -->
+  <div class="section-head"><h2>Calendario PLD que no puedes perder</h2><p>Fechas del Acuerdo 115/2026 y de la reforma LFPIORPI</p></div>
+  <section class="two-col">
+    <div class="panel">
+      <ul class="timeline">
+        <li><span class="tdate">30 NOV 2026</span><div><strong>Entra en vigor el Acuerdo 115/2026</strong><span>Reforma integral a las Reglas de Carácter General de la LFPIORPI, publicada en el DOF el 7 de agosto de 2026.</span></div></li>
+        <li><span class="tdate">01 MAR 2027</span><div><strong>EBR, Manual y Beneficiario Controlador exigibles</strong><span>La metodología de Enfoque Basado en Riesgos debe estar disponible a la autoridad; inicia la clasificación de clientes por grado de riesgo.</span></div></li>
+        <li><span class="tdate">01 JUN 2027</span><div><strong>Nuevos formatos de Avisos e Informes</strong><span>Todos los sujetos obligados deberán usar los formatos oficiales actualizados en el SPPLD, incluidos los avisos de 24 horas.</span></div></li>
+        <li><span class="tdate">2028</span><div><strong>Primera auditoría anual bajo el nuevo modelo</strong><span>Verificación independiente del sistema de gestión de riesgos, no solo de la presentación de avisos.</span></div></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin:0 0 14px;font-family:Newsreader,serif;font-size:22px">Así se actualizaría cada día</h3>
+      <div class="steps">
+        <div class="step"><span class="num">1</span><div><strong>Por la mañana, revisión de fuentes</strong><p>DOF, UIF/SHCP, CNBV, GAFI y prensa nacional especializada. Solo entra lo verificable, con fecha.</p></div></div>
+        <div class="step"><span class="num">2</span><div><strong>Nota redactada en lenguaje útil</strong><p>Qué pasó, a quién le afecta —banco, notaría, inmobiliaria, casino, municipio— y qué fecha debe anotar.</p></div></div>
+        <div class="step"><span class="num">3</span><div><strong>Tú apruebas y se publica</strong><p>En esta plataforma cada actualización requiere tu aprobación con un toque. Si un día quieres que sea 100% automático, el mismo blog se muda a GitHub Pages o WordPress sin rehacerlo.</p></div></div>
+      </div>
+      <div class="sources-list"><span>DOF</span><span>UIF · SHCP</span><span>CNBV</span><span>SAT · SPPLD</span><span>GAFI / GAFILAT</span><span>OFAC</span></div>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:16px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+    <div style="max-width:620px"><h3 style="margin:0 0 6px;font-family:Newsreader,serif;font-size:24px">¿Te gusta así?</h3><p style="margin:0;color:var(--muted)">Esta es solo la maqueta para visualizar. Si la apruebas, el siguiente paso es ponerle tu nombre como autor, tu libro y tus asesorías en PLD — y decidir si queda público desde el día uno o primero en borrador unos días.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><span class="tag">Prueba visual</span><span class="tag teal">Aún no público</span></div>
+  </section>
+
+</main>
+
+<footer class="site"><div class="wrap">
+  <span><strong style="color:var(--ink)">Blog PLD</strong> · Prevención de Lavado de Dinero en México — Versión de prueba para visualización.</span>
+  <span>Cada nota enlaza a su fuente original. El bloqueo de cuentas y las listas son medidas preventivas: no equivalen a una determinación de responsabilidad.</span>
+</div></footer>
+
+<dialog id="reader" aria-labelledby="readerTitle">
+  <div class="dialog-body">
+    <button class="close-btn" id="closeDialog">Cerrar ✕</button>
+    <span class="tag plain" id="readerTag">Nota</span>
+    <h2 id="readerTitle"></h2>
+    <p id="readerMeta" style="font-size:13px"></p>
+    <p id="readerBody"></p>
+    <div class="key"><strong>Por qué importa</strong><ul id="readerKey"></ul></div>
+    <p style="margin-top:16px"><a id="readerSource" href="#" target="_blank" rel="noopener" style="font-weight:800;color:var(--teal)">Ver fuente original ↗</a></p>
+  </div>
+</dialog>
+
+<script>
+var ARTICLES = {
+  a1:{tag:"UIF · Lista de Personas Bloqueadas", title:"UIF bloquea cuentas de proveedores electorales: 25 personas y 15 empresas", meta:"6 de noviembre de 2026 · La Jornada", body:"El titular de la UIF, Omar Reyes Colmenares, precisó en la conferencia matutina que se congelaron las cuentas de 25 personas físicas y 15 personas morales vinculadas con la proveeduría de material electoral, tras detectar un conjunto de identificadores de operaciones con recursos de procedencia ilícita. El patrón descrito es textbook: el dinero dura muy poco en una cuenta y se traslada a cuentas sin actividad comercial aparente, como las de estudiantes o adultos mayores. La Presidenta señaló que, hasta ahora, no se ha encontrado vínculo con delincuencia organizada, y que SAT y UIF analizan las características de lavado; de confirmarse, la UIF presentaría otra denuncia ante la FGR. Hacienda no confirmó nombres: el artículo 115 de la Ley de Instituciones de Crédito protege esa información mientras hay investigación en curso.", key:["La Lista de Personas Bloqueadas es preventiva: bloquea hoy, juzga después. Quien asesora a proveedores del sector público debe monitorearla a diario.","El identificador clave no fue el monto, fue el comportamiento: tránsito rápido y cuentas sin actividad aparente.","El caso cruza contratación pública y PLD: el riesgo no está solo en bancos, está en la cadena de proveeduría."], source:"https://www.jornada.com.mx/2026/11/06/politica/003n2pol", sourceLabel:"La Jornada, 6 nov 2026"},
+  a2:{tag:"Normativa · LFPIORPI", title:"Acuerdo 115/2026: el EBR deja de ser buena práctica y se vuelve obligación", meta:"DOF 7 de agosto de 2026 · Entrada en vigor 30 de noviembre de 2026", body:"El Acuerdo 115/2026 reforma, adiciona y deroga las Reglas de Carácter General de la LFPIORPI. Su cambio central es el nuevo Capítulo II Quáter: cada actividad vulnerable debe diseñar su propia metodología de Enfoque Basado en Riesgos, con indicadores para clientes, operaciones, geografías, productos y canales, valores consistentes y mitigantes documentados, con al menos 12 meses de datos. Se suman capítulos de clasificación de riesgo, conocimiento del cliente, beneficiario controlador, mecanismos automatizados y auditoría anual. El Manual de Políticas Internas pasa a tener 14 contenidos mínimos obligatorios.", key:["Fecha que manda: 1 de marzo de 2027 — EBR y Manual deben estar disponibles a la autoridad.","Conservación documental: 10 años, alineado con la reforma LFPIORPI de 2025.","Ya no basta con presentar avisos: hay que demostrar cómo mides y mitigas tu riesgo."], source:"https://www.ey.com/es_mx/technical/tax/boletines-fiscales/ey-law-flash-modificaciones-reglas-lfpiorpi", sourceLabel:"EY México — análisis del Acuerdo 115/2026"},
+  a3:{tag:"Sector financiero · UIF / CNBV", title:"UIF y CNBV firman convenio para modernizar la supervisión antilavado", meta:"16 de marzo de 2026 · Comunicado conjunto SHCP", body:"La UIF y la CNBV suscribieron un Convenio de Colaboración con cinco ejes: intercambio de información más ágil y seguro, grupos de trabajo interinstitucionales para casos relevantes, modernización de la supervisión con enfoque basado en riesgos, fortalecimiento tecnológico de la Lista de Personas Bloqueadas y capacitación con participación en foros del GAFI. El titular de Hacienda, Édgar Amador Zamora, recordó que ambas instituciones colaboran desde hace casi dos décadas; el titular de la UIF, Omar Reyes Colmenares, detalló que los grupos emitirán recomendaciones especializadas y darán seguimiento conjunto a riesgos del sistema financiero.", key:["Para SOFOMes ENR, supervisadas por la CNBV solo en PLD, el convenio implica supervisión más coordinada con inteligencia de la UIF.","La Lista de Personas Bloqueadas se vuelve infraestructura tecnológica compartida, no solo un listado."], source:"https://www.jornada.com.mx/2026/03/17/economia/016n3eco", sourceLabel:"La Jornada, 17 mar 2026"},
+  a4:{tag:"Casinos y juegos · Segob", title:"Segob prepara reforma a la Ley de Juegos y Sorteos contra el lavado en casinos", meta:"3 de septiembre de 2026 · Anuncio en conferencia matutina", body:"La secretaria de Gobernación, Rosa Icela Rodríguez, anunció que la propuesta para reformar la Ley Federal de Juegos y Sorteos —vigente desde 1947— ya completó su revisión interna y pasará al gabinete de seguridad. El contexto: las investigaciones sobre 13 casinos detectados en noviembre de 2025 con operaciones en efectivo, flujos internacionales y plataformas digitales no supervisadas, y un volumen de 202,045 reportes del sector ante la UIF entre enero y mayo de 2026 por al menos $15,287 millones de pesos. Segob separó su función regulatoria de la vertiente investigativa, que llevan FGR y SHCP/UIF.", key:["Juegos con apuesta es actividad vulnerable (art. 17 LFPIORPI): el umbral de aviso en 2026 ronda los $75,665 (645 UMA).","La reforma busca cerrar el hueco de las plataformas digitales no supervisadas, el canal que más creció."], source:"https://www.infobae.com/mexico/2026/09/03/segob-va-contra-lavado-de-dinero-en-casinos-y-centros-de-apuestas-modificaran-ley-federal/", sourceLabel:"Infobae, 3 sep 2026"},
+  a5:{tag:"Casinos · Tribunales", title:"Un tribunal falla a favor de Ganador Azteca, Bet365 y Betano frente al bloqueo de la UIF", meta:"24 de octubre de 2026 · Resolución federal", body:"Un tribunal federal dio la razón a Ganador Azteca y a las operadoras de Bet365 y Betano en la disputa originada por su incorporación a la Lista de Personas Bloqueadas el 11 de noviembre de 2025. TV Azteca difundió la resolución. El matiz práctico es clave: el fallo no libera los saldos de forma automática; bancos y autoridades deben ejecutar el desbloqueo formal para que los usuarios dispongan de sus fondos. Ganador Azteca operaba Bet365 bajo licencia del grupo británico Hillside.", key:["Ganar el litigio no es lo mismo que recuperar la operatividad el mismo día: el desbloqueo es un trámite posterior.","El caso alimentará el debate sobre proporcionalidad y debido proceso en los bloqueos preventivos."], source:"https://www.elimparcial.com/mexico/2026/10/24/tribunal-fallo-a-favor-de-salinas-pliego-y-sus-casinos-en-linea-bet-365-y-betano-anuncio-tv-azteca/?outputType=amp-type", sourceLabel:"El Imparcial, 24 oct 2026"},
+  a6:{tag:"Normativa · DOF de hoy", title:"Ley de Ingresos 2027: repatriación de capitales al 7.5%, con PLD estricto", meta:"13 de noviembre de 2026 · Diario Oficial de la Federación, código 5803757", body:"La Ley de Ingresos de la Federación 2027, publicada hoy y vigente desde el 1 de enero de 2027, incluye en su Transitorio Vigésimo Tercero un esquema de repatriación de capitales con tasa del 7.5%, retorno hasta el 31 de diciembre de 2027 y permanencia mínima de 3 años en el país. La condición PLD es expresa: bancos y casas de bolsa deben aplicar estrictamente las medidas de prevención de lavado de dinero y financiamiento al terrorismo, y quedan excluidos los recursos de actividad ilícita y los provenientes de jurisdicciones de alto riesgo del GAFI.", key:["Todo esquema de repatriación es, por diseño, una prueba de origen de recursos: la debida diligencia reforzada es el centro.","Si asesoras a clientes con capital en el extranjero, la ventana cierra el 31 de diciembre de 2027."], source:"https://dof.gob.mx/index.php?year=2026&month=11&day=13", sourceLabel:"DOF, edición del 13 nov 2026"},
+  a7:{tag:"GAFI · Evaluación mutua", title:"México rumbo a la evaluación del GAFI 2027: avances reales, pendientes claros", meta:"Actualizado el 18 de julio de 2026 · Seguimiento desde la evaluación de 2018", body:"Desde la evaluación de 2018, México reformó la LFPIORPI (2025), reformó su Reglamento por primera vez desde 2013 (DOF 27 de marzo de 2026) y fortaleció a UIF y CNBV. Entre los cambios medibles: conservación de expedientes de 5 a 10 años, umbral de activos virtuales reducido de 645 a 210 UMA, capítulo de Personas Políticamente Expuestas con lista oficial de la UIF, aviso de 24 horas por intentos de operación inusual y mecanismos automatizados obligatorios. El país no está en la lista gris, pero sigue bajo seguimiento intensificado; la evaluación de 2027 será la definitiva sobre efectividad, no solo sobre normas en papel.", key:["El GAFI ya no califica solo leyes: califica resultados — investigaciones, sanciones y decomisos.","El Acuerdo 115/2026 es, en buena parte, la respuesta operativa a esa evaluación que viene."], source:"https://kyc-systems.com/blog/mexico-mejora-sus-medidas-contra-el-lavado-de-dinero-y-financiamiento-del-terrorismo", sourceLabel:"Análisis de evaluación GAFI — México"}
+};
+var dialog = document.getElementById('reader');
+function openArticle(id){
+  var a = ARTICLES[id]; if(!a) return;
+  document.getElementById('readerTag').textContent = a.tag;
+  document.getElementById('readerTitle').textContent = a.title;
+  document.getElementById('readerMeta').textContent = a.meta;
+  document.getElementById('readerBody').textContent = a.body;
+  var ul = document.getElementById('readerKey'); ul.innerHTML='';
+  a.key.forEach(function(k){ var li=document.createElement('li'); li.textContent=k; ul.appendChild(li); });
+  var src = document.getElementById('readerSource'); src.href=a.source; src.textContent='Ver fuente original: '+a.sourceLabel+' ↗';
+  if(typeof dialog.showModal==='function') dialog.showModal(); else dialog.setAttribute('open','');
+}
+document.querySelectorAll('[data-open]').forEach(function(btn){ btn.addEventListener('click', function(){ openArticle(btn.getAttribute('data-open')); }); });
+document.getElementById('closeDialog').addEventListener('click', function(){ dialog.close(); });
+// Filters
+var currentFilter='all';
+function applyFilters(){
+  var q = document.getElementById('searchInput').value.trim().toLowerCase();
+  var visible=0;
+  document.querySelectorAll('#grid .card').forEach(function(card){
+    var catOk = currentFilter==='all' || card.getAttribute('data-cat').indexOf(currentFilter)>-1;
+    var qOk = !q || (card.getAttribute('data-title')+' '+card.textContent.toLowerCase()).indexOf(q)>-1;
+    var show = catOk && qOk;
+    card.classList.toggle('hidden-card', !show);
+    if(show) visible++;
+  });
+  document.getElementById('countLabel').textContent = 'Mostrando '+visible+' nota'+(visible===1?'':'s');
+  document.getElementById('emptyState').style.display = visible===0 ? 'block':'none';
+}
+document.querySelectorAll('.chip').forEach(function(chip){
+  chip.addEventListener('click', function(){
+    document.querySelectorAll('.chip').forEach(function(c){ c.setAttribute('aria-pressed','false'); });
+    chip.setAttribute('aria-pressed','true');
+    currentFilter = chip.getAttribute('data-filter');
+    applyFilters();
+  });
+});
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+</script>
+</body>
+</html>
